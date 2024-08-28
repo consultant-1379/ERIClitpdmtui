@@ -1,0 +1,10 @@
+{
+    "mappings": [{
+        "source": "/dmt"
+    }],
+    "host": "localhost",
+    "port": 8080,
+    "headers": {
+        "X-Custom-Header": "cdt"
+    }
+}

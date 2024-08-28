@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ericsson.litp</groupId>
+        <artifactId>integration</artifactId>
+        <version>1.14.2</version>
+    </parent>
+    <groupId>LITP</groupId>
+    <artifactId>ERIClitpdmtui</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.94-SNAPSHOT</version>
+    <name>Deployment Management UI</name>
+
+    <modules>
+        <module>DeploymentManagementToolUI</module>
+		<module>ERIClitpdmtui_CXP9030614-rpm</module>
+       <!--  <module>dmt-tests</module> -->
+    </modules>	
+    
+    <scm>
+ 		<connection>${ericsson.scm.url}</connection>
+ 		<developerConnection>${ericsson.scm.url}</developerConnection>
+ 		<tag>HEAD</tag>
+ 	</scm>
+    	
+</project>

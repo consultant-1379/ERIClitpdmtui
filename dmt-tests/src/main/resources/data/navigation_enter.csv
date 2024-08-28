@@ -1,0 +1,4 @@
+initialPath,expected
+/software/,software
+/infrastructure/,infrastructure
+/infrastructure/networking/,networking

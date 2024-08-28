@@ -1,0 +1,81 @@
+.eaDMT-wNavigation-input-iconHolder .eaDMT-wNavigation-input-closeIcon{
+  height: 100%;
+  display: none;
+}
+
+.eaDMT-wNavigation {
+  font-size: 10pt;
+  font-family: lucida console;
+  height: 24px;
+  display: block;
+  padding: 8px 0px;
+  .icon(@icon){
+    background: @icon;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  &-input {
+    width: 640px;
+    float: left;
+    padding: 0px 12px 0px 4px;
+    //outline: none;
+    &-iconHolder{
+      position: absolute;
+      top:0;
+      bottom: 0;
+      right:32px;
+      opacity:0.4;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    &-closeIcon_show{
+      display: inline-block !important;
+    }
+  }
+  &-button {
+    position: absolute;
+    height: 22px;
+    border: none;
+    cursor: pointer;
+    margin: 1px 0 0;
+    right: 1px;
+    border-left: 1px solid #b3b3b3;
+    background-color: transparent;
+    border-radius: 0 2px 2px 0;
+    //outline: none;
+    &:disabled {
+      cursor: not-allowed;
+      -ms-touch-action: none;
+      touch-action: none;
+      background: rgba(0, 0, 0, 0.1);
+      color: #B2B2B2;
+    }
+    &-icon{
+      .icon(@path);
+      &_search{
+        .icon(@search);
+      }
+      &_loading{
+        .icon(@spinner);
+      }
+    }
+  }
+}
+
+  /*==============Icons=============*/
+  @search: url("@{current-url}/ebIcon_searchWhite.svg");
+  @path: url("@{current-url}/ebIcon_rightArrowWhite.svg");
+  @spinner: url("@{current-url}/ebIcon_spinner_18.gif");
+  @close: url("@{current-url}/ebIcon_X_black_16px.svg");
+
+  /*==============Colours=============*/
+  @svg-background: #f7f7f7;
+  @light-grey:#dbdada;
+  @medium-grey:#cccccc;
+  @dark-grey:#96908e;
+  @node:#5f5b5a;
+  @ericsson-link:#0a67b2;
+  @ericsson-black: #2b2528;
+  @ericsson-blue: #4ab0de;
+  @ericsson-green: #86bc25;
+  @pure-white: #ffffff;

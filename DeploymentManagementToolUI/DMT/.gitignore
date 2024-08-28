@@ -1,0 +1,7 @@
+.cdt/
+.backup/
+tmp/
+target/
+node_modules/
+*.tar.gz
+*.tgz

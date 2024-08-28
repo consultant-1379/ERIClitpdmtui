@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="complete">
+	<parameter name="taf.repeat-count" value="1"/>
+	<test name="Transaction" preserve-order="true">
+		<classes>
+            <class name="com.ericsson.nms.litp.dmt.test.cases.DmtUiTest">
+                <methods>
+                	<include name="verifyModelExists" />
+                	<include name="enterNavigationPath" />
+                    <include name="verifyFirstPropertyText" />
+                    <include name="infoButtonRestoresHelpboxToScreen" />
+                    <include name="openFirstProperty" />
+                    <include name="closeFirstProperty" />
+                    <include name="verifyZoomingIntoTree" />
+                    <include name="verifyZoomingOutOfTree" />
+                    <include name="verifyPanningWorks" />
+                    <include name="verifyRepositionTreeWorks" />
+                    <include name="verifyOnLabelClickedPropertiesDisplay" />
+                    <include name="verifyNavigationBarSearchDisplaysPropertyAsExpected" />
+					<include name="verifyPathOpensAsExpected" />
+					<include name="verifyOnLabelClickedPropertiesDisplay" />
+					<include name="verifyNavigationBarAutoSuggest" />
+                    <include name="verifyCanAddAndDeleteNode" />
+                </methods>
+            </class>
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>ERIClitpdmtui</artifactId>
+		<groupId>LITP</groupId>
+		<version>1.0.94-SNAPSHOT</version>
+	</parent>
+	<artifactId>ERIClitpdmtui_CXP9030614</artifactId>
+	<name>[${project.parent.artifactId}] RPM module</name>
+	<packaging>rpm</packaging>
+	<properties>
+		<com.ericsson.oss.rpm.architecture>noarch</com.ericsson.oss.rpm.architecture>
+		<!-- Install path = /${rpm-root}/${comp-name}/${install-path} -->
+		<rpm-root>opt</rpm-root>
+		<comp-name>ericsson</comp-name>
+		<install-path>${project.groupId}</install-path>
+        <!-- publishes the rpm module to the ci portal -->
+        <publish_artifact>true</publish_artifact>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>unpack_tools</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.ericsson.oss.clientcommon</groupId>
+									<artifactId>container</artifactId>
+									<version>RELEASE</version>
+									<type>tar.gz</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/dependencies/dmtui</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ericsson.oss.uisdk.clientsdk</groupId>
+									<artifactId>jscore</artifactId>
+									<classifier>prod</classifier>
+									<version>RELEASE</version>
+									<type>tar.gz</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/dependencies/dmtui</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ericsson.oss.uisdk.clientsdk</groupId>
+									<artifactId>widgets</artifactId>
+									<version>RELEASE</version>
+									<classifier>prod</classifier>
+									<type>tar.gz</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/dependencies/dmtui</outputDirectory>
+								</artifactItem>
+								 <artifactItem>
+									<groupId>com.ericsson.oss</groupId>
+									<artifactId>branding</artifactId>
+									<version>RELEASE</version>
+									<classifier>prod</classifier>
+									<type>tar.gz</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/dependencies/dmtui</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ericsson.oss.uisdk</groupId>
+									<artifactId>helpsdk</artifactId>
+									<version>RELEASE</version>
+									<type>tar.gz</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/dependencies/dmtui</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>LITP</groupId>
+									<artifactId>dmtUI</artifactId>
+									<version>${project.version}</version>
+									<type>tar.gz</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/dependencies/dmtui</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<configuration>
+					<group>Applications/System</group>
+					<mappings combine.self="override">
+						<mapping>
+							<directory>/${rpm-root}/${comp-name}</directory>
+							<filemode>775</filemode>
+							<username>root</username>
+							<groupname>root</groupname>
+						</mapping>
+						
+
+						<!-- The UI to be deployed into apache -->
+						<mapping>
+							<directory>/var/www/html/dmt</directory>
+							<directoryIncluded>false</directoryIncluded>
+							<filemode>644</filemode>
+							<sources>
+								<source>
+									<location>target/dependencies/dmtui</location>
+								</source>
+							</sources>
+						</mapping>
+
+						<!-- the DMT ui apache cofiguration to be located into the /etc/httpd/conf.d -->
+						<mapping>
+							<directory>/etc/httpd/conf.d</directory>
+							<filemode>775</filemode>
+							<username>apache</username>
+							<groupname>apache</groupname>
+							<directoryIncluded>false</directoryIncluded>
+							<sources>
+								<source>
+									<location>src/main/conf/apache</location>
+									<includes> 
+                    					<include>dmt_web.conf</include> 
+                  					</includes>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+
+
+					<postinstallScriptlet>
+						<scriptFile>src/main/conf/apache/dmt_postinstall.sh</scriptFile>
+					</postinstallScriptlet>
+
+
+					<postremoveScriptlet>
+						<scriptFile>src/main/conf/apache/dmt_postuninstall.sh</scriptFile>
+					</postremoveScriptlet>
+
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

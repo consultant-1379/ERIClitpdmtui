@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<concept id="WhatsNew">
+    <title>What's New</title>
+    <conbody>
+        <dl>
+            <dlentry id="appName">
+                <dt>App</dt>
+                <dd>DMTDeployments</dd>
+            </dlentry>
+            <dlentry id="version">
+                <dt>Version</dt>
+                <dd>{{version}}</dd>
+            </dlentry>
+        </dl>
+        <section>
+            <title>Section Title</title>
+            <p>Section Description</p>
+        </section>
+    </conbody>
+</concept>

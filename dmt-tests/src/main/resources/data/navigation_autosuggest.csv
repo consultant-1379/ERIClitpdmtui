@@ -1,0 +1,5 @@
+inputText,expectedChildren
+/m,/ms
+/i,/infrastructure
+/d,/deployments
+/infrastructure/s,/infrastructure/systems/infrastructure/system_providers/infrastructure/storage

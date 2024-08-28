@@ -1,0 +1,40 @@
+{
+    "parent": "$(parentJson)/app.json",
+    "defaultPhase": "package",
+    "properties": {
+        "package": "dmt",
+        "name": "DMT",
+        "version": "1.0.0",
+        "skeleton": "2.0.16",
+        "skeletonType": "app"
+    },
+    "phases": {
+        "package": {
+            "depends": [
+                "clean",
+                "analyze",
+                "test",
+                "compile",
+                "compress"
+            ]
+        },
+        "jscoverage": {
+            "execute": {
+                "command": "$(jscoverage)",
+                "attributes": [
+                    "src",
+                    "$(buildDir)/src",
+                    "--exclude",
+                    "dmt/ext/D3/d3.js"
+                ]
+            }
+        }
+    },
+    "dependencies": {
+        "jscore": "1.2.1",
+        "widgets": "1.2.2",
+        "branding": "1.1.16",
+        "container": "1.7.5",
+        "assets": "1.2.1"
+    }
+}

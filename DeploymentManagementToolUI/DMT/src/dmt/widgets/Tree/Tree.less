@@ -1,0 +1,124 @@
+.eaDMT-wTree {
+  width: 100%;
+  height: 600px;
+  transition: width 0.5s;
+  &_disabled{
+    cursor: not-allowed !important;
+  }
+  &_resize {
+    transition: width 0s;
+  }
+  &-node {
+    display: block;
+    font-size: 10pt;
+    &-gCircle{
+      &_empty{
+        .eaDMT-wTree-node-gCircle-path-linkUnderline{ display:none; }
+        .eaDMT-wTree-node-gCircle-path-linkUnderline2{ display:none; }
+      }
+      &-lastClickedNode{
+        .eaDMT-wTree-node-gCircle-path-linkUnderline{ stroke: @pure-white; }
+        .eaDMT-wTree-node-gCircle-path-linkUnderline2{ stroke: @pure-white; }
+        .eaDMT-wTree-node-gCircle-circle{ fill: @lastClicked-node !important; }
+      }
+      &-circle {
+        cursor: pointer;
+        fill: @pure-white;
+        stroke: @node;
+        stroke-width: 1px;
+        &_selected{
+          stroke: @ericsson-green !important;
+          fill: @ericsson-green !important;
+        }
+        &_empty{
+          stroke: @node;
+          stroke-width: 1px;
+          fill: @light-grey !important;
+          cursor: default;
+        }
+      }
+      &-path{
+        stroke: @node;
+        stroke-width: 1.25px;
+        fill: none;
+        cursor: pointer;
+        &-linkUnderline{
+          &_selected{
+            stroke: @pure-white !important;
+          }
+        }
+        &-linkUnderline2{
+          stroke-width: 0px;
+          &_showing{
+            stroke-width: 1.25px;
+            fill: none;
+          }
+          &_selected{
+            stroke: @pure-white !important;
+          }
+        }
+
+      }
+    }
+    &-textLabel {
+      &_selected{
+        fill: @ericsson-green;
+        font-weight: bold;
+      }
+      &:hover{
+        fill: @ericsson-green;
+        cursor:default;
+      }
+    }
+    &-root {
+      .eaDMT-wTree-node-gCircle{
+        &-circle{
+          cursor: default;
+          stroke: @medium-grey;
+          stroke-width:3.5px !important;
+        }
+        &-path{
+          cursor: default;
+          stroke-width: 0px;
+        }
+      }
+    }
+  }
+  &-link {
+    stroke: @light-grey;
+    fill: none;
+    stroke-width: 1px;
+    &_selected {
+      stroke: @ericsson-green;
+      stroke-width: 1.5px;
+    }
+  }
+  &-labelHolder {
+    font-weight: bold;
+    font-size: 1.4rem !important;
+    display: none;
+    position: absolute;
+  }
+  &-svg {
+    pointer-events: all;
+    &_disablePointer{
+      pointer-events: none;
+    }
+  }
+}
+
+/*==============Colours=============*/
+@svg-background: #f7f7f7;
+@light-grey:#dbdada;
+@medium-grey:#cccccc;
+@dark-grey:#96908e;
+@node:#5f5b5a;
+@ericsson-link:#0a67b2;
+@ericsson-black: #2b2528;
+@ericsson-blue: #4ab0de;
+@ericsson-green: #86bc25;
+@pure-white: #ffffff;
+@svg-background: #f7f7f7;
+@lastClicked-node: #999999;
+
+

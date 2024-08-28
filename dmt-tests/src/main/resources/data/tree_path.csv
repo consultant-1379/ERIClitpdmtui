@@ -1,0 +1,3 @@
+initialPath,expectedChildren
+/deployments/,single_blade
+/deployments/single_blade/,clusters

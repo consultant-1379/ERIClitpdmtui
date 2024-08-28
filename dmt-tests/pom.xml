@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!--<parent>
+		<groupId>com.ericsson.nms.litp</groupId>
+		<artifactId>DeploymentManagementTool</artifactId>
+		<version>2.1.2-SNAPSHOT</version>
+	</parent>-->
+
+    <parent>
+        <groupId>com.ericsson</groupId>
+        <artifactId>master</artifactId>
+        <version>3.0</version>
+    </parent>
+
+	<groupId>com.ericsson.nms.litp.dmt.test</groupId>
+	<artifactId>dmt-tests</artifactId>
+	<name>DMT TAF tests</name>
+	<description>DMT TAF tests</description>
+	<version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<enforcer.fail>false</enforcer.fail>
+		<taf.project.version>2.0.8-SNAPSHOT</taf.project.version>
+		<taf.sdk>all</taf.sdk>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.ericsson.cifwk</groupId>
+				<artifactId>taf-bom</artifactId>
+				<version>${taf.project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ericsson.cifwk.taf.demo</groupId>
+			<artifactId>calculator-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson.cifwk</groupId>
+			<artifactId>${taf.sdk}-taf-sdk</artifactId>
+			<version>${taf.project.version}</version>
+			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson.cifwk</groupId>
+			<artifactId>testing-events-listener</artifactId>
+			<version>${taf.project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.5</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>com.jayway.jsonpath</groupId>
+    		<artifactId>json-path</artifactId>
+    		<version>0.8.1</version>
+		</dependency>
+
+		<dependency>
+   			 <groupId>com.jayway.jsonpath</groupId>
+    			<artifactId>json-path-assert</artifactId>
+    			<version>0.8.1</version>
+    			<scope>test</scope>
+		</dependency>
+
+
+		<!-- TODO Remove after modularization -->
+		<dependency>
+			<groupId>com.ericsson.cifwk</groupId>
+			<artifactId>taf-ui</artifactId>
+			<version>${taf.project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson.cifwk</groupId>
+			<artifactId>taf-ui-sikuli</artifactId>
+			<version>${taf.project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson.cifwk</groupId>
+			<artifactId>taf-ui-selenium</artifactId>
+			<version>${taf.project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sikuli</groupId>
+			<artifactId>sikuli-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>prototype</id>
+			<url>https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/repositories/prototype</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.2.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<generateReports>false</generateReports>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>suites</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.reporting</groupId>
+								<artifactId>maven-reporting-impl</artifactId>
+								<version>2.0.5</version>
+								<exclusions>
+									<exclusion>
+										<groupId>commons-logging</groupId>
+										<artifactId>commons-logging</artifactId>
+									</exclusion>
+								</exclusions>
+							</dependency>
+						</dependencies>
+
+						<executions>
+							<execution>
+								<id>taf:copy-dependencies</id>
+								<phase>generate-test-resources</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+								<configuration>
+									<includeScope>runtime</includeScope>
+									<includeGroupIds>com.ericsson.cifwk</includeGroupIds>
+									<outputDirectory>${project.build.directory}/lib</outputDirectory>
+									<overWriteReleases>false</overWriteReleases>
+									<overWriteSnapshots>true</overWriteSnapshots>
+									<overWriteIfNewer>true</overWriteIfNewer>
+									<stripClassifier>true</stripClassifier>
+									<stripVersion>true</stripVersion>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<mainClass>com.ericsson.cifwk.taf.Taf</mainClass>
+							<classpathScope>test</classpathScope>
+							<commandlineArgs>-dir ${project.build.outputDirectory}/suites</commandlineArgs>
+							<systemProperties>
+								<systemProperty>
+									<key>projectName</key>
+									<value>${project.name}</value>
+								</systemProperty>
+								<systemProperty>
+									<key>fetchLogs</key>
+									<value>true</value>
+								</systemProperty>
+								<systemProperty>
+									<key>name</key>
+									<value>TAF</value>
+								</systemProperty>
+								<systemProperty>
+									<key>logdir</key>
+									<value>${project.build.directory}/Jcat_LOGS</value>
+								</systemProperty>
+								<systemProperty>
+									<key>legacylogging</key>
+									<value />
+								</systemProperty>
+								<systemProperty>
+									<key>suitethreadpoolsize</key>
+									<value>25</value>
+								</systemProperty>
+								<systemProperty>
+									<key>taf.management</key>
+									<value />
+								</systemProperty>
+							</systemProperties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>maven.test.skip</id>
+			<activation>
+				<property>
+					<name>maven.test.skip</name>
+					<value>true</value>
+				</property>
+			</activation>
+		</profile>
+		<profile>
+			<id>skipTests</id>
+			<activation>
+				<property>
+					<name>skipTests</name>
+					<value>true</value>
+				</property>
+			</activation>
+		</profile>
+	</profiles>
+
+</project>
+

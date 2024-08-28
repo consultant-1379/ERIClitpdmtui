@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<site>
+    <title>DMTDeployments</title>
+    <homeTitle>Home</homeTitle>
+    <home>
+        <blocks>
+            <block color="purple" icon="page" href="whatsnew.xml">
+                <title>What's New?</title>
+                <desc>Learn about the new features in DMTDeployments.</desc>
+            </block>
+            <block color="green" icon="screen" href="ui.xml">
+                <title>User Interface</title>
+                <desc>Learn the key elements of the user interface.</desc>
+            </block>
+            <block color="blue" icon="book" href="tutorials/map.xml">
+                <title>Tutorials</title>
+                <desc>Tutorials explain how to use key features in DMTDeployments.</desc>
+            </block>
+            <block color="darkblue" icon="video" href="videos.xml">
+                <title>Videos</title>
+                <desc>Watch the available videos for DMTDeployments.</desc>
+            </block>
+        </blocks>
+        <import type="list-titles" limit="3" conref="faq.xml" viewAll="View All"/>
+    </home>
+</site>
